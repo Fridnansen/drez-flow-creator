@@ -85,6 +85,12 @@ All colors MUST be HSL.
     --sidebar-border: 222 30% 22%;
     --sidebar-ring: 210 100% 55%;
   }
+
+  :root {
+    --gradient-silver: linear-gradient(135deg, hsl(210 20% 92%), hsl(215 15% 62%), hsl(210 20% 88%));
+    --hero-glow: radial-gradient(60% 60% at 50% 20%, hsl(215 100% 40% / 0.28), transparent 70%);
+    --shadow-glow: 0 0 80px hsl(215 100% 45% / 0.25);
+  }
 }
 
 @layer base {
@@ -93,6 +99,10 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
