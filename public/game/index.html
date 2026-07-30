@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Masterdrez — Versión Avanzada — Dupla y Modos — Pack descargable</title>
+  <title>Masterdrez — Tablero de ajedrez para 4 jugadores</title>
+  <meta name="description" content="Juega Masterdrez: ajedrez de 16x16 para cuatro jugadores con estilos Dupla e Individual y modos tras mate." />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     :root {
@@ -284,6 +285,8 @@
       <label>Controles</label>
       <div class="row"><button id="btnStart" class="primary">Iniciar partida</button><button
           id="btnReset">Reiniciar</button></div>
+      <label>Registro</label>
+      <div id="log"></div>
     </div>
     <div class="boardCard">
       <div class="topbar">
@@ -301,7 +304,7 @@
       <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
         <div class="small muted">Arrastra piezas. Promoción en borde. En-passant persistente y prioridad por turno más
           inmediato.</div>
-        <div><button id="btnAssets">Descargar ZIP (HTML + assets)</button></div>
+        
       </div>
     </div>
   </div>
@@ -312,7 +315,7 @@
       <div style="text-align:right;margin-top:8px"><button id="promoCancel">Cancelar</button></div>
     </div>
   </div>
-  <footer>Archivo: Opción B — Pack descargable con assets de ejemplo y demos automáticas.</footer>
+  <footer>Masterdrez — Tablero de 4 jugadores. Arrastra las piezas para jugar.</footer>
   <script>
     /* ---------- Código JS avanzado (Opción B) ---------- */
     const SIZE = 16; const COLORS = ['white', 'blue', 'black', 'red']; const colorLabel = { white: 'Blanco', blue: 'Azul', black: 'Negro', red: 'Rojo' };
@@ -406,29 +409,9 @@ let gameCount = 0;
     function snapshot() { return { html: board.innerHTML, enPassants: JSON.parse(JSON.stringify(state.enPassants)), moved: JSON.parse(JSON.stringify(state.moved)), specialTurn: JSON.parse(JSON.stringify(state.specialTurn || null)) }; }
     function restore(snap) { board.innerHTML = snap.html; state.enPassants = snap.enPassants || []; state.moved = snap.moved || {}; state.specialTurn = snap.specialTurn || null; for (const cell of board.querySelectorAll('.cell:not(.invalid)')) { cell.addEventListener('dragover', e => e.preventDefault()); cell.addEventListener('drop', onDrop); } for (const p of board.querySelectorAll('.piece')) { if (!p.dataset.pid) p.dataset.pid = String(nextPid++); p.addEventListener('dragstart', onDragStart); p.addEventListener('dragend', onDragEnd); } setTurnUI(); }
     function resetBoard() { buildBoard(); placeBasePieces(); state.enPassants = []; state.moved = {}; state.kingsAlive = {}; for (const c of COLORS) state.kingsAlive[c] = !!findKing(c); state.pairs = { A: ['white','black'], B: ['blue','red'] }; state.style = document.getElementById('selectStyle').value; state.modeAfterMate = document.getElementById('selectMode').value; turnIndex = Math.floor(Math.random() * COLORS.length); state.specialTurn = null; setTurnUI(); setMsg(`Iniciado: Estilo=${state.style}, Modo=${state.modeAfterMate}`); log(`Partida iniciada — Estilo=${state.style} — Modo=${state.modeAfterMate} — Duplas: A=${state.pairs.A.join('/')} B=${state.pairs.B.join('/')}`); }
-    document.getElementById('btnStart').addEventListener('click', () => resetBoard()); document.getElementById('btnReset').addEventListener('click', () => resetBoard()); document.getElementById('btnAssets').addEventListener('click', () => downloadZip());
-    // --- Demo sequences (automated tests) ---
-    function runSequence(moves, onFinish) { // moves: [{from:[r,c], to:[r,c]}...]
-      let i = 0; function step() { if (i >= moves.length) { if (onFinish) onFinish(); return; } const m = moves[i++]; const from = getCell(m.from[0], m.from[1]); const to = getCell(m.to[0], m.to[1]); if (!from || !to) { log('Demo: casilla no encontrada'); step(); return; } const p = from.firstChild; if (!p) { log('Demo: pieza no encontrada en ' + m.from); step(); return; } const ok = tryMove(p, from, to); log('Demo move ' + (ok ? 'OK' : 'FAIL') + ` ${p.dataset.color} ${p.dataset.type} ${m.from}->${m.to}`); setTimeout(step, 450); } step();
-    }
-    // Simple crafted sequences that illustrate Retorno (V) and Jaque Pase. These are illustrative — board positions are from initial setup and may require manual tuning.
-    document.getElementById('demoRetorno').addEventListener('click', () => {
-      resetBoard(); // small sequence: remove one king to reach 3 kings state quickly
-      // We'll simulate capturing Black's king by White to create 3-kings scenario: move a white rook to capture black king at (0,8)
-      const seq = [{ from: [15, 7], to: [11, 7] }, { from: [11, 7], to: [7, 7] }, { from: [7, 7], to: [3, 7] }, { from: [3, 7], to: [0, 8] }]; // pathfinding approximate
-      runSequence(seq, () => { log('Demo Retorno: secuencia terminada — revise log para ver activación de Retorno'); });
-    });
-    document.getElementById('demoJaquePase').addEventListener('click', () => {
-      resetBoard(); // attempt to produce a jaque pase scenario: attacker gives check to an allied king
-      const seq = [{ from: [3, 15], to: [7, 15] }, { from: [7, 15], to: [7, 11] }, { from: [7, 11], to: [7, 8] }]; runSequence(seq, () => { log('Demo Jaque Pase: secuencia terminada — observe el log para activación de Jaque Pase'); });
-    });
-    // --- Download ZIP generation (creates files and zips them) ---
-    async function downloadZip() { // ask backend (python_user_visible will create zip). We trigger by fetching a special URL that will be served by the environment. But instead we call a download link generated by the assistant via python tool.
-      // The assistant will generate the ZIP and provide a link. Click the button again after file appears in the chat.
-      alert('Preparando ZIP en el servidor. Espera el link de descarga en el chat.');
-    }
+    document.getElementById('btnStart').addEventListener('click', () => resetBoard()); document.getElementById('btnReset').addEventListener('click', () => resetBoard()); 
     // --- Boot
-    resetBoard(); setMsg('Pulsa Iniciar partida y usa demos para probar Retorno/Jaque Pase.');
+    resetBoard(); setMsg('Pulsa Iniciar partida para comenzar.');
   </script>
 </body>
 
