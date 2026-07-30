@@ -33,7 +33,7 @@ const Story = () => (
           <MapPin className="h-4 w-4" aria-hidden="true" /> Buenos Aires, Aregntina
         </span>
         <h3 className="mt-4 text-2xl font-semibold">
-          De Fundación Social a Plataforma Global
+          Videojuego Masterdrez
         </h3>
         <div className="mt-6 space-y-4 text-muted-foreground">
           <p>
