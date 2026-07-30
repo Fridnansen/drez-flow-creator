@@ -24,21 +24,20 @@ const Story = () => (
       <header className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl md:text-4xl">Nuestra Historia</h2>
         <p className="mt-4 text-muted-foreground">
-          Desde las calles de Trujillo, Venezuela, hasta una plataforma global que transforma vidas.
+          Desde las calles de Buenos Aires, Argentina, hasta una plataforma global que transforma vidas.
         </p>
       </header>
 
       <div className="mt-14 rounded-xl border border-border bg-card p-8 md:p-12">
         <span className="inline-flex items-center gap-2 text-sm text-accent">
-          <MapPin className="h-4 w-4" aria-hidden="true" /> Trujillo, Venezuela
+          <MapPin className="h-4 w-4" aria-hidden="true" /> Buenos Aires, Aregntina
         </span>
         <h3 className="mt-4 text-2xl font-semibold">
           De Fundación Social a Plataforma Global
         </h3>
         <div className="mt-6 space-y-4 text-muted-foreground">
           <p>
-            Masterdrez nació como una fundación dedicada a enseñar ajedrez a niños y jóvenes en
-            riesgo social en Trujillo, Venezuela, con un 5% de impacto directo en la comunidad.
+            Masterdrez desarrolla una plataforma tecnológica de nueva generación para videojuegos de estrategia, diseñada específicamente para implementar un sistema original de ajedrez multijugador de cuatro jugadores. 
           </p>
           <p>
             Descubrimos que el ajedrez no solo forma mentes ágiles, también construye disciplina,
