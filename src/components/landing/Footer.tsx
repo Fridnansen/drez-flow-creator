@@ -12,7 +12,7 @@ const Footer = () => (
         <Link to="/game">Jugar Ahora</Link>
       </Button>
       <p className="mt-12 border-t border-border/60 pt-8 text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Masterdrez. Trujillo, Venezuela.
+        © {new Date().getFullYear()} Masterdrez. Buenos Aires, Argentina.
       </p>
     </div>
   </footer>

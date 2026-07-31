@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const links = [
   { href: "#caracteristicas", label: "Características" },
   { href: "#historia", label: "Historia" },
-  { href: "#equipo", label: "Equipo" },
+  { href: "#equipo", label: "Reglas" },
 ];
 
 const Header = () => (
