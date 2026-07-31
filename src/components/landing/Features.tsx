@@ -24,7 +24,7 @@ const features = [
   {
     icon: Gift,
     title: "Recompensas Diarias",
-    text: "Juega al menos 5 minutos diarios y recibe recompensas que mejoran tu experiencia y ranking.",
+    text: "Juega al menos 10 minutos diarios y recibe recompensas que mejoran tu experiencia y ranking.",
   },
   {
     icon: Swords,
@@ -53,7 +53,7 @@ const features = [
   },
   {
     icon: Dices,
-    title: "Juego de Mesa Físico",
+    title: "Juego de Mesa (Físico)",
     text: "Versión física de Masterdrez para disfrutar en casa con familia y amigos.",
   },
 ];
