@@ -22,9 +22,9 @@ const Story = () => (
   <section id="historia" className="py-20 md:py-28">
     <div className="container">
       <header className="mx-auto max-w-2xl text-center">
-        <h2 className="font-display text-3xl md:text-4xl">Nuestra Historia</h2>
+        <h2 className="font-display text-3xl md:text-4xl">Nuevo Emprendimiento</h2>
         <p className="mt-4 text-muted-foreground">
-          Desde las calles de Buenos Aires, Argentina, hasta una plataforma global que transforma vidas. Masterdrez es un emprendimiento de base tecnológica que busca crear una nueva categoría dentro de los juegos de estrategia mediante una plataforma innovadora de ajedrez para cuatro jugadores. El proyecto integra desarrollo de software, inteligencia artificial, computación en la nube, propiedad intelectual y un modelo de negocio escalable que combina videojuego, juego de mesa, educación y eSports. Aspiramos a posicionar una innovación argentina en el mercado internacional, demostrando que desde el país es posible desarrollar tecnología competitiva con impacto global.
+          Masterdrez es un emprendimiento de base tecnológica que busca crear una nueva categoría dentro de los juegos de estrategia mediante una plataforma innovadora de ajedrez para cuatro jugadores. El proyecto integra desarrollo de software, inteligencia artificial, computación en la nube, propiedad intelectual y un modelo de negocio escalable que combina videojuego, juego de mesa, educación y eSports. Aspiramos a posicionar este juego innovador al mercado internacional, demostrando que desde Latinoamérica es posible desarrollar tecnología competitiva con impacto global.
         </p>
       </header>
 

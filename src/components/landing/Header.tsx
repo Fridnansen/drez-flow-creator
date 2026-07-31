@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const links = [
   { href: "#caracteristicas", label: "Características" },
-  { href: "#historia", label: "Historia" },
+  { href: "#historia", label: "Emprendimiento" },
   { href: "#equipo", label: "Reglas" },
 ];
 
