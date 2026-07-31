@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "videojuego-masterdrez-2d",
+      "version": "0.1.0",
+      "title": "Videojuego-Masterdrez-2D"
+    },
+    "tools": [
+      {
+        "name": "get_project_overview",
+        "title": "Resumen del proyecto",
+        "description": "Devuelve el resumen público de Masterdrez: propuesta, ubicación, modelo de negocio, métricas y URL para jugar.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_features",
+        "title": "Listar características",
+        "description": "Lista las características públicas de la plataforma Masterdrez, con filtro opcional por texto.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Texto opcional para filtrar características por título o descripción."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_game_rules",
+        "title": "Reglas del juego",
+        "description": "Devuelve las reglas públicas de Masterdrez (Estilos, Empates y Modos). Se puede pedir un tema específico.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "topic": {
+              "type": "string",
+              "enum": [
+                "estilos",
+                "empates",
+                "modos"
+              ],
+              "description": "Tema de reglas a consultar. Si se omite, devuelve todos."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_play_link",
+        "title": "Enlace para jugar",
+        "description": "Devuelve el enlace público para jugar al tablero de Masterdrez de cuatro jugadores en el navegador.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
