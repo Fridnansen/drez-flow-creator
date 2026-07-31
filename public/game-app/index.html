@@ -409,9 +409,61 @@ let gameCount = 0;
     function snapshot() { return { html: board.innerHTML, enPassants: JSON.parse(JSON.stringify(state.enPassants)), moved: JSON.parse(JSON.stringify(state.moved)), specialTurn: JSON.parse(JSON.stringify(state.specialTurn || null)) }; }
     function restore(snap) { board.innerHTML = snap.html; state.enPassants = snap.enPassants || []; state.moved = snap.moved || {}; state.specialTurn = snap.specialTurn || null; for (const cell of board.querySelectorAll('.cell:not(.invalid)')) { cell.addEventListener('dragover', e => e.preventDefault()); cell.addEventListener('drop', onDrop); } for (const p of board.querySelectorAll('.piece')) { if (!p.dataset.pid) p.dataset.pid = String(nextPid++); p.addEventListener('dragstart', onDragStart); p.addEventListener('dragend', onDragEnd); } setTurnUI(); }
     function resetBoard() { buildBoard(); placeBasePieces(); state.enPassants = []; state.moved = {}; state.kingsAlive = {}; for (const c of COLORS) state.kingsAlive[c] = !!findKing(c); state.pairs = { A: ['white','black'], B: ['blue','red'] }; state.style = document.getElementById('selectStyle').value; state.modeAfterMate = document.getElementById('selectMode').value; turnIndex = Math.floor(Math.random() * COLORS.length); state.specialTurn = null; setTurnUI(); setMsg(`Iniciado: Estilo=${state.style}, Modo=${state.modeAfterMate}`); log(`Partida iniciada — Estilo=${state.style} — Modo=${state.modeAfterMate} — Duplas: A=${state.pairs.A.join('/')} B=${state.pairs.B.join('/')}`); }
-    document.getElementById('btnStart').addEventListener('click', () => resetBoard()); document.getElementById('btnReset').addEventListener('click', () => resetBoard()); 
+    document.getElementById('btnStart').addEventListener('click', () => { resetBoard(); saveGame(); }); document.getElementById('btnReset').addEventListener('click', () => { resetBoard(); saveGame(); });
+
+    // --- Guardado / restauración de partida
+    const SAVE_KEY = 'masterdrez:savedGame';
+    function saveGame() {
+      try {
+        const data = {
+          v: 1,
+          boardHtml: board.innerHTML,
+          logHtml: logEl.innerHTML,
+          msg: msgEl.textContent,
+          turnIndex,
+          nextPid,
+          state: JSON.parse(JSON.stringify(state)),
+          selectStyle: document.getElementById('selectStyle').value,
+          selectMode: document.getElementById('selectMode').value,
+          savedAt: Date.now(),
+        };
+        localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+        return true;
+      } catch (_) { return false; }
+    }
+    function loadGame() {
+      let data = null;
+      try { data = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null'); } catch (_) { data = null; }
+      if (!data || !data.boardHtml) return false;
+      board.innerHTML = data.boardHtml;
+      logEl.innerHTML = data.logHtml || '';
+      turnIndex = data.turnIndex || 0;
+      nextPid = data.nextPid || 1;
+      Object.assign(state, data.state || {});
+      if (data.selectStyle) document.getElementById('selectStyle').value = data.selectStyle;
+      if (data.selectMode) document.getElementById('selectMode').value = data.selectMode;
+      for (const cell of board.querySelectorAll('.cell:not(.invalid)')) { cell.addEventListener('dragover', e => e.preventDefault()); cell.addEventListener('drop', onDrop); }
+      for (const p of board.querySelectorAll('.piece')) { if (!p.dataset.pid) p.dataset.pid = String(nextPid++); p.addEventListener('dragstart', onDragStart); p.addEventListener('dragend', onDragEnd); }
+      setTurnUI();
+      setMsg(data.msg || '');
+      return true;
+    }
+    // Autoguardado tras cada jugada y al salir de la página
+    const _advanceTurn = advanceTurn;
+    advanceTurn = function () { _advanceTurn(); saveGame(); };
+    window.addEventListener('pagehide', saveGame);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') saveGame(); });
+    // Guardado a petición del contenedor (botón "Volver al Inicio")
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'masterdrez:save') {
+        const ok = saveGame();
+        if (e.source) e.source.postMessage({ type: 'masterdrez:saved', ok }, '*');
+      }
+    });
+
     // --- Boot
-    resetBoard(); setMsg('Pulsa Iniciar partida para comenzar.');
+    if (loadGame()) { log('Partida restaurada.'); }
+    else { resetBoard(); setMsg('Pulsa Iniciar partida para comenzar.'); }
   </script>
 </body>
 
