@@ -14,7 +14,7 @@ const team = [
   {
     name: "Modos",
     role: "Prócer, Paz, Esclavo, Genocidio y De Facto",
-    text: "Cada Modo se debe anunciar al inicio de la partida y\n\nse realiza una vez dado el Mate al primer Rey",
+    text: "Cada Modo se debe anunciar al inicio de la partida y\nse realiza una vez dado el Mate al primer Rey",
     number: "5",
   },
 ];
