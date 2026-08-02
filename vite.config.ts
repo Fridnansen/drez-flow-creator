@@ -48,8 +48,9 @@ export default defineConfig(({ mode }) => ({
             options: { cacheName: "html-navigations", networkTimeoutSeconds: 5 },
           },
           {
-            urlPattern: ({ url, request }) =>
-              url.origin === self.location.origin && ["style", "script", "image", "font"].includes(request.destination),
+            urlPattern: ({ url, request, sameOrigin }) =>
+              !!sameOrigin && ["style", "script", "image", "font"].includes(request.destination) && !!url,
+
             handler: "CacheFirst",
             options: {
               cacheName: "static-assets",
