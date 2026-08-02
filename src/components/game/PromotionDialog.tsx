@@ -13,7 +13,7 @@ interface PromotionDialogProps {
 /** Diálogo de promoción del peón al alcanzar cualquier borde del tablero. */
 const PromotionDialog = ({ open, color, onSelect }: PromotionDialogProps) => (
   <Dialog open={open}>
-    <DialogContent className="max-w-[min(92vw,26rem)]" hideClose>
+    <DialogContent className="max-w-[min(92vw,26rem)] [&>button]:hidden">
       <DialogHeader>
         <DialogTitle className="font-display">Promoción — {COLOR_LABEL[color]}</DialogTitle>
       </DialogHeader>
