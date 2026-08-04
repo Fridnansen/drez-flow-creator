@@ -5,7 +5,7 @@ import marca from "@/assets/masterdrez-marca.png.asset.json";
 const stats = [
   { value: "2M+", label: "Usuarios Potenciales" },
   { value: "4", label: "Jugadores Simultáneos" },
-  { value: "10min", label: "Recompensas Diarias" },
+  { value: "20min", label: "Recompensas Diarias" },
 ];
 
 const Hero = () => (
