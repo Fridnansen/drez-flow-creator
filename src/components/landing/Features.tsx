@@ -19,12 +19,12 @@ const features = [
   {
     icon: Timer,
     title: "Partidas Rápidas y Lentas",
-    text: "Desde partidas rápidas de 15 minutos hasta torneos de un día completo. Adapta el juego a tu ritmo.",
+    text: "Desde partidas rápidas de 20 minutos hasta torneos de un día completo. Adapta el juego a tu ritmo.",
   },
   {
     icon: Gift,
     title: "Recompensas Diarias",
-    text: "Juega al menos 10 minutos diarios y recibe recompensas que mejoran tu experiencia y ranking.",
+    text: "Juega al menos 20 minutos diarios y recibe recompensas que mejoran tu experiencia y ranking.",
   },
   {
     icon: Swords,

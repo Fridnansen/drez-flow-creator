@@ -58,8 +58,7 @@ const MainMenu = ({ hasSave, onPlay, onResume, onOpenSection }: MainMenuProps) =
             className="w-[min(90%,26rem)] drop-shadow-[0_0_2.5rem_hsl(var(--cyan)/0.25)]"
           />
           <p className="max-w-[38ch] text-[clamp(0.85rem,2.6vw,1rem)] text-muted-foreground">
-            Ajedrez de 16×16 para cuatro ejércitos. Estilos Duplas y Unitario, con Retorno, Jaque Pase, Soplo y modos
-            tras mate.
+            Ajedrez en Tablero en Forma de Cruz para cuatro ejércitos. Estilos Duplas y Unitario, con Retorno, Jaque Pase, Aniquilación y Modos tras mate.
           </p>
           <div className="flex w-full max-w-[26rem] flex-col gap-[0.6rem] sm:flex-row">
             <Button size="lg" className="btn-premium min-h-12 flex-1 gap-2 text-base" onClick={() => onPlay(style, mode, Number(minutes))}>

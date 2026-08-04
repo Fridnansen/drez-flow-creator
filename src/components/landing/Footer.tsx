@@ -5,8 +5,8 @@ const Footer = () => (
   <footer className="py-16">
     <div className="container text-center">
       <h2 className="font-display text-3xl md:text-4xl">Es más que un ajedrez</h2>
-      <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-        Prueba el tablero de cuatro jugadores y vive la estrategia desde una nueva perspectiva.
+      <p className="mx-auto mt-4 max-w-xl text-muted-foreground whitespace-pre-line">
+        {"Prueba el tablero de cuatro jugadores\u00A0\ny vive la estrategia desde una nueva perspectiva."}
       </p>
       <Button asChild size="lg" className="mt-8">
         <Link to="/game">Jugar Ahora</Link>
